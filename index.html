@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Translator</title>
+</head>
+<body>
+    <div>
+        <input type="text" placeholder="Enter text" id="input-text">
+        
+    </div>
+    <div>
+        <input type="text" placeholder="From Language" id="from-lang">
+        <input type="text" placeholder="To Language" id="to-lang">
+    </div>
+    <div>
+
+        <button onclick="translate_text()">Translate</button>
+        <div id="output"></div>
+    </div>
+    
+
+    
+    <script>
+        function translate_text(){
+            var a = document.querySelector("#input-text").value;
+            var b = document.querySelector("#from-lang").value;
+            var c = document.querySelector("#to-lang").value;
+    
+            fetch(`https://api.mymemory.translated.net/get?q=${a}&langpair=${b}|${c}`)
+                .then((response) => response.json())
+                .then((data) =>{
+                    document.querySelector("#output").innerHTML = data['responseData']['translatedText'];
+
+                console.log(data['responseData']['translatedText'])
+            })
+        }
+    </script>
+</body>
+</html>
